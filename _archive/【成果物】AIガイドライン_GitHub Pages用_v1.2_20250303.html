@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>株式会社LIFEFUND AIガイドライン</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-primary: #1a1a2e;
+    --color-secondary: #16213e;
+    --color-accent: #0f3460;
+    --color-accent-light: #e8eef6;
+    --color-text: #2c2c2c;
+    --color-text-light: #6b6b6b;
+    --color-border: #e0e0e0;
+    --color-border-light: #f0f0f0;
+    --color-bg: #ffffff;
+    --color-bg-subtle: #fafafa;
+    --color-gold: #8b7355;
+    --color-gold-light: #f7f3ee;
+    --font-sans: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Noto Serif JP', Georgia, serif;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.9;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(0,0,0,.12);
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 60px;
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .header-logo img {
+    height: 28px;
+    width: auto;
+  }
+
+  .header-nav {
+    display: flex;
+    gap: 1.5rem;
+    font-size: .8rem;
+    font-weight: 400;
+    letter-spacing: .04em;
+  }
+
+  .header-nav a {
+    color: rgba(255,255,255,.7);
+    text-decoration: none;
+    transition: color .2s;
+    white-space: nowrap;
+  }
+
+  .header-nav a:hover {
+    color: #fff;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--color-accent) 100%);
+    color: #fff;
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero-logo {
+    margin-bottom: 2rem;
+  }
+
+  .hero-logo img {
+    height: 120px;
+    width: auto;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,.3);
+    padding: .3rem 1.2rem;
+    border-radius: 2rem;
+    font-size: .75rem;
+    letter-spacing: .15em;
+    margin-bottom: 2rem;
+    color: rgba(255,255,255,.85);
+  }
+
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    line-height: 1.5;
+    margin-bottom: .8rem;
+  }
+
+  .hero-version {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,.7);
+    margin-bottom: 2rem;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    font-size: .82rem;
+    color: rgba(255,255,255,.6);
+    flex-wrap: wrap;
+  }
+
+  .hero-meta span {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+  }
+
+  .hero-meta .label {
+    color: rgba(255,255,255,.4);
+  }
+
+  /* ── Layout ── */
+  .page-wrapper {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  /* ── Sidebar (TOC) ── */
+  .sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 60px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    padding: 2rem 0 2rem 2rem;
+    border-right: 1px solid var(--color-border-light);
+    scrollbar-width: thin;
+    scrollbar-color: #ddd transparent;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+
+  .toc-title {
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    padding-left: .5rem;
+  }
+
+  .toc-list {
+    list-style: none;
+  }
+
+  .toc-list li {
+    margin-bottom: .15rem;
+  }
+
+  .toc-list a {
+    display: block;
+    padding: .35rem .5rem;
+    font-size: .78rem;
+    color: var(--color-text-light);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all .2s;
+    line-height: 1.5;
+    border-left: 2px solid transparent;
+  }
+
+  .toc-list a:hover {
+    color: var(--color-accent);
+    background: var(--color-accent-light);
+  }
+
+  .toc-list a.active {
+    color: var(--color-accent);
+    border-left-color: var(--color-accent);
+    font-weight: 500;
+    background: var(--color-accent-light);
+  }
+
+  .toc-list .toc-sub {
+    padding-left: 1rem;
+    margin-top: .1rem;
+    margin-bottom: .2rem;
+  }
+
+  .toc-list .toc-sub a {
+    font-size: .73rem;
+    padding: .25rem .5rem;
+    color: #999;
+  }
+
+  /* ── Main Content ── */
+  .main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 3rem 3rem 5rem;
+  }
+
+  /* ── Sections ── */
+  .section {
+    margin-bottom: 4rem;
+    scroll-margin-top: 80px;
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--color-border), transparent);
+    margin: 3.5rem 0;
+  }
+
+  .section-number {
+    display: inline-block;
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .15em;
+    color: var(--color-accent);
+    background: var(--color-accent-light);
+    padding: .2rem .8rem;
+    border-radius: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    letter-spacing: .04em;
+    line-height: 1.5;
+    padding-bottom: .8rem;
+    border-bottom: 2px solid var(--color-primary);
+  }
+
+  h3 {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 2.5rem 0 1rem;
+    letter-spacing: .03em;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+
+  h3::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 1.1em;
+    background: var(--color-accent);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  h4 {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 2rem 0 .8rem;
+    letter-spacing: .02em;
+    line-height: 1.6;
+  }
+
+  h5 {
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    margin: 1.5rem 0 .6rem;
+    letter-spacing: .02em;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    font-size: .92rem;
+    line-height: 1.9;
+    color: var(--color-text);
+  }
+
+  /* ── Lists ── */
+  ul, ol {
+    margin: .8rem 0 1.2rem 1.5rem;
+    font-size: .92rem;
+  }
+
+  li {
+    margin-bottom: .4rem;
+    line-height: 1.8;
+  }
+
+  li::marker {
+    color: var(--color-accent);
+  }
+
+  /* ── Tables ── */
+  .table-wrapper {
+    overflow-x: auto;
+    margin: 1.2rem 0 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .85rem;
+  }
+
+  thead {
+    background: var(--color-primary);
+    color: #fff;
+  }
+
+  th {
+    padding: .75rem 1rem;
+    text-align: left;
+    font-weight: 500;
+    letter-spacing: .03em;
+    font-size: .8rem;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: .7rem 1rem;
+    border-top: 1px solid var(--color-border-light);
+    vertical-align: top;
+  }
+
+  tbody tr:hover {
+    background: var(--color-bg-subtle);
+  }
+
+  tbody tr:nth-child(even) {
+    background: #fafbfc;
+  }
+
+  tbody tr:nth-child(even):hover {
+    background: #f5f6f7;
+  }
+
+  /* ── Callout / Important ── */
+  .callout {
+    background: var(--color-gold-light);
+    border-left: 4px solid var(--color-gold);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 6px 6px 0;
+    font-size: .88rem;
+  }
+
+  .callout-danger {
+    background: #fef2f2;
+    border-left-color: #dc2626;
+  }
+
+  .callout strong {
+    display: block;
+    font-size: .82rem;
+    letter-spacing: .05em;
+    margin-bottom: .3rem;
+    color: var(--color-gold);
+  }
+
+  .callout-danger strong {
+    color: #dc2626;
+  }
+
+  /* ── Badges ── */
+  .badge {
+    display: inline-block;
+    font-size: .7rem;
+    font-weight: 600;
+    padding: .15rem .6rem;
+    border-radius: 3px;
+    letter-spacing: .05em;
+    margin-right: .3rem;
+    vertical-align: middle;
+  }
+
+  .badge-severe { background: #fef2f2; color: #dc2626; }
+  .badge-minor { background: #fffbeb; color: #d97706; }
+
+  /* ── Numbered Principles ── */
+  .principles {
+    counter-reset: principle;
+    list-style: none;
+    margin-left: 0;
+    padding: 0;
+  }
+
+  .principles li {
+    counter-increment: principle;
+    position: relative;
+    padding-left: 2.5rem;
+    margin-bottom: 1rem;
+    font-size: .92rem;
+  }
+
+  .principles li::before {
+    content: counter(principle);
+    position: absolute;
+    left: 0;
+    top: .15rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .75rem;
+    font-weight: 600;
+  }
+
+  /* ── Flow Steps ── */
+  .flow-steps {
+    display: flex;
+    gap: 0;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  .flow-step {
+    flex: 1;
+    min-width: 160px;
+    padding: 1.2rem 1rem;
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border-light);
+    position: relative;
+    text-align: center;
+  }
+
+  .flow-step:first-child { border-radius: 8px 0 0 8px; }
+  .flow-step:last-child { border-radius: 0 8px 8px 0; }
+
+  .flow-step-num {
+    display: inline-block;
+    width: 1.6rem;
+    height: 1.6rem;
+    background: var(--color-accent);
+    color: #fff;
+    border-radius: 50%;
+    font-size: .7rem;
+    font-weight: 600;
+    line-height: 1.6rem;
+    margin-bottom: .5rem;
+  }
+
+  .flow-step-title {
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: .3rem;
+  }
+
+  .flow-step-desc {
+    font-size: .72rem;
+    color: var(--color-text-light);
+    line-height: 1.5;
+  }
+
+  .flow-step + .flow-step::before {
+    content: '→';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-accent);
+    font-size: 1rem;
+    font-weight: 700;
+    z-index: 1;
+  }
+
+  /* ── Note ── */
+  .note {
+    font-size: .82rem;
+    color: var(--color-text-light);
+    padding: .8rem 1rem;
+    background: var(--color-bg-subtle);
+    border-radius: 6px;
+    margin: 1rem 0;
+    border: 1px solid var(--color-border-light);
+  }
+
+  .note::before {
+    content: '※ ';
+    font-weight: 600;
+  }
+
+  /* ── Footer ── */
+  .site-footer {
+    background: var(--color-primary);
+    color: rgba(255,255,255,.5);
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: .82rem;
+    letter-spacing: .04em;
+  }
+
+  .footer-logo {
+    margin-bottom: 1rem;
+  }
+
+  .footer-logo img {
+    height: 20px;
+    width: auto;
+    opacity: .7;
+  }
+
+  .footer-company {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: rgba(255,255,255,.8);
+    margin-bottom: .3rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+  }
+
+  .footer-name {
+    color: rgba(255,255,255,.6);
+    font-size: .85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── Back to Top ── */
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 44px;
+    height: 44px;
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all .3s;
+    z-index: 50;
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .back-to-top:hover {
+    background: var(--color-accent);
+  }
+
+  /* ── Quick Access Banner ── */
+  .quick-access-banner {
+    background: var(--color-primary);
+    padding: .8rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .quick-access-banner span {
+    color: rgba(255,255,255,.7);
+    font-size: .82rem;
+    letter-spacing: .03em;
+  }
+
+  .quick-access-banner a {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    background: #e67e22;
+    color: #fff;
+    padding: .5rem 1.5rem;
+    border-radius: 6px;
+    font-size: .82rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: .03em;
+    transition: all .2s;
+  }
+
+  .quick-access-banner a:hover {
+    background: #d35400;
+    transform: translateY(-1px);
+  }
+
+  .quick-access-banner a::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'%3E%3C/path%3E%3Cpolyline points='14 2 14 8 20 8'%3E%3C/polyline%3E%3Cline x1='12' y1='18' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='9' y1='15' x2='15' y2='15'%3E%3C/line%3E%3C/svg%3E") no-repeat center;
+  }
+
+  @media (max-width: 600px) {
+    .quick-access-banner {
+      flex-direction: column;
+      gap: .6rem;
+      padding: .8rem 1rem;
+    }
+  }
+
+  /* ── Apply Button ── */
+  .apply-btn-wrapper {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--color-accent-light) 0%, #f0f4ff 100%);
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+  }
+
+  .apply-btn-wrapper p {
+    font-size: .85rem;
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+  }
+
+  .apply-btn {
+    display: inline-block;
+    background: var(--color-accent);
+    color: #fff;
+    padding: .85rem 2.5rem;
+    border-radius: 8px;
+    font-size: .95rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: .05em;
+    transition: all .3s;
+    box-shadow: 0 2px 8px rgba(15, 52, 96, .25);
+  }
+
+  .apply-btn:hover {
+    background: var(--color-primary);
+    box-shadow: 0 4px 16px rgba(15, 52, 96, .35);
+    transform: translateY(-1px);
+  }
+
+  .apply-btn::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: .5rem;
+    vertical-align: middle;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'%3E%3C/path%3E%3Cpolyline points='14 2 14 8 20 8'%3E%3C/polyline%3E%3Cline x1='12' y1='18' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='9' y1='15' x2='15' y2='15'%3E%3C/line%3E%3C/svg%3E") no-repeat center;
+  }
+
+  /* ── Print ── */
+  @media print {
+    .site-header, .sidebar, .back-to-top { display: none; }
+    .main-content { padding: 1rem; }
+    .hero { padding: 2rem; }
+    h2 { break-after: avoid; }
+    .section { break-inside: avoid; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main-content { padding: 2rem 1.5rem 3rem; }
+    .hero h1 { font-size: 1.6rem; }
+    .hero { padding: 3rem 1.5rem 2.5rem; }
+    .hero-logo img { height: 80px; }
+    .header-nav { display: none; }
+    .flow-steps { flex-direction: column; }
+    .flow-step { border-radius: 0 !important; }
+    .flow-step:first-child { border-radius: 8px 8px 0 0 !important; }
+    .flow-step:last-child { border-radius: 0 0 8px 8px !important; }
+    .flow-step + .flow-step::before { content: '↓'; left: 50%; top: -8px; transform: translateX(-50%); }
+  }
+
+  @media (max-width: 600px) {
+    .main-content { padding: 1.5rem 1rem 2rem; }
+    h2 { font-size: 1.3rem; }
+    h3 { font-size: 1.05rem; }
+    .hero-meta { flex-direction: column; gap: .5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-logo"><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="display:flex;align-items:center;"><img src="logo_header.png" alt="LIFEFUND"></a></div>
+    <nav class="header-nav">
+      <a href="#intro">はじめに</a>
+      <a href="#definitions">用語の定義</a>
+      <a href="#principles">基本理念</a>
+      <a href="#guidelines">共通の指針</a>
+      <a href="#categories">活用の類型</a>
+      <a href="#ai-tool-application">申請</a>
+      <a href="#governance">ガバナンス体制</a>
+      <a href="#appendix">附則</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-logo"><img src="logo_hero.png" alt="LIFEFUND"></div>
+    <div class="hero-badge">CORPORATE POLICY</div>
+    <h1>株式会社LIFEFUND<br>AIガイドライン</h1>
+    <div class="hero-version">第1.2版</div>
+    <div class="hero-meta">
+      <span><span class="label">施行日</span> 2026年2月4日</span>
+      <span><span class="label">策定</span> 代表取締役社長</span>
+      <span><span class="label">最終更新</span> 2026年3月3日</span>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Access Banner -->
+<div class="quick-access-banner">
+  <span>有償AIツールの利用申請はこちら</span>
+  <a href="#ai-tool-application">AIツール利用申請</a>
+</div>
+
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+
+  <!-- Sidebar / TOC -->
+  <aside class="sidebar">
+    <div class="toc-title">目次</div>
+    <ul class="toc-list">
+      <li><a href="#intro">はじめに</a>
+        <ul class="toc-sub">
+          <li><a href="#intro-purpose">本ガイドラインの目的</a></li>
+          <li><a href="#intro-position">本ガイドラインの位置づけ</a></li>
+          <li><a href="#intro-scope">適用範囲</a></li>
+        </ul>
+      </li>
+      <li><a href="#definitions">第1部 用語の定義</a></li>
+      <li><a href="#principles">第2部 基本理念</a>
+        <ul class="toc-sub">
+          <li><a href="#vision">ビジョンとの整合</a></li>
+          <li><a href="#principle-list">原則</a></li>
+        </ul>
+      </li>
+      <li><a href="#guidelines">第3部 共通の指針</a>
+        <ul class="toc-sub">
+          <li><a href="#g-human">1. 人間中心</a></li>
+          <li><a href="#g-safety">2. 安全性</a></li>
+          <li><a href="#g-fairness">3. 公平性</a></li>
+          <li><a href="#g-privacy">4. プライバシー保護</a></li>
+          <li><a href="#g-security">5. セキュリティ確保</a></li>
+          <li><a href="#g-transparency">6. 透明性・説明責任</a></li>
+          <li><a href="#g-education">7. 教育・リテラシー</a></li>
+          <li><a href="#g-competition">8. 公正競争・イノベーション</a></li>
+        </ul>
+      </li>
+      <li><a href="#categories">第4部 活用の類型と留意事項</a>
+        <ul class="toc-sub">
+          <li><a href="#cat-user">A. AI利用者としての当社</a></li>
+          <li><a href="#ai-tool-application">AIツール利用申請</a></li>
+          <li><a href="#cat-provider">B. AI提供者としての当社</a></li>
+        </ul>
+      </li>
+      <li><a href="#governance">第5部 AIガバナンス体制</a>
+        <ul class="toc-sub">
+          <li><a href="#gov-org">組織体制</a></li>
+          <li><a href="#gov-process">運用プロセス</a></li>
+          <li><a href="#gov-education">教育・研修</a></li>
+        </ul>
+      </li>
+      <li><a href="#appendix">第6部 附則</a></li>
+      <li><a href="#references">参考資料</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- はじめに -->
+    <section class="section" id="intro">
+      <span class="section-number">INTRODUCTION</span>
+      <h2>はじめに</h2>
+
+      <h3 id="intro-purpose">本ガイドラインの目的</h3>
+      <p>株式会社LIFEFUND（以下「当社」）は、「あらゆる人が喜びある人生を叶えられる地域社会をつくる」というビジョンのもと、住宅・不動産・相続・AIの4領域で地域社会のインフラ企業を目指しています。</p>
+      <p>AI技術は、設計・積算・施工管理・集客の全業務プロセスにおいて当社の競争力の源泉であり、2031年の売上高100億円達成に向けた成長戦略の中核を担っています。一方で、AI技術の利用拡大に伴い、適切なガバナンスなくしては、お客様・社員・協力会社・地域社会といったステークホルダーに対するリスクも増大します。</p>
+      <p>本ガイドラインは、総務省・経済産業省が策定した「AI事業者ガイドライン（第1.1版）」（令和7年3月28日）を参照し、当社におけるAIの安全安心な活用を促進するための指針を定めるものです。当社の全役職員がAIを適切に開発・提供・利用し、イノベーションの促進とリスクの緩和を両立することを目的とします。</p>
+
+      <h3 id="intro-position">本ガイドラインの位置づけ</h3>
+      <p>本ガイドラインは、当社が取り組むべきAIガバナンスの基本的な考え方を示す社内規程であり、法的拘束力を持つ規制ではありません。ただし、当社の全役職員は本ガイドラインを遵守し、AIの適切な活用に努めるものとします。</p>
+      <p>本ガイドラインは、AI技術の発展および社会環境の変化に応じて、適宜更新を行います。</p>
+
+      <h3 id="intro-scope">適用範囲</h3>
+      <p>本ガイドラインは、当社におけるAIの開発・提供・利用に関わる全ての役職員に適用されます。また、当社の協力会社・パートナー企業がAIを活用して当社業務を遂行する場合にも、本ガイドラインの趣旨を尊重することを求めます。</p>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- 第1部 用語の定義 -->
+    <section class="section" id="definitions">
+      <span class="section-number">PART 1</span>
+      <h2>第1部 用語の定義</h2>
+
+      <h3>AI（人工知能）</h3>
+      <p>本ガイドラインにおける「AI」とは、機械学習をするソフトウェアまたはプログラムを含む抽象的な概念を指します。画像認識、自然言語処理、音声認識、生成AI等を含みます。</p>
+
+      <h3>AIシステム</h3>
+      <p>活用の過程を通じて様々なレベルの自律性をもって動作し学習する機能を有するソフトウェアを要素として含むシステムを指します。当社で活用するChatGPT、Claude、Cursor、Gemini等の生成AIツールおよびそれらを組み込んだ業務システムを含みます。</p>
+
+      <h3>AIサービス</h3>
+      <p>AIシステムを用いた役務を指します。当社が社内で活用するAIサービス、および「建築AI経営研究会」として外部に提供するAI関連サービスを含みます。</p>
+
+      <h3>生成AI</h3>
+      <p>文章、画像、プログラム等を生成できるAIモデルに基づくAIの総称を指します。</p>
+
+      <h3>ステークホルダー</h3>
+      <p>当社のAI活用によって直接・間接の影響を受ける可能性がある全ての主体を指します。具体的には以下を含みます：</p>
+      <ul>
+        <li>お客様（住宅購入者、不動産取引者、相続相談者等）</li>
+        <li>社員（役員、従業員、パート・アルバイト）</li>
+        <li>協力会社（施工業者、設計パートナー、仕入先等）</li>
+        <li>地域社会（浜松市・静岡県を中心とする地域住民、自治体等）</li>
+        <li>業界（建設業界、不動産業界、住宅業界の同業他社、業界団体等）</li>
+      </ul>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- 第2部 基本理念 -->
+    <section class="section" id="principles">
+      <span class="section-number">PART 2</span>
+      <h2>第2部 基本理念</h2>
+
+      <h3 id="vision">A. ビジョンとの整合</h3>
+      <p>当社のビジョン「あらゆる人が喜びある人生を叶えられる地域社会をつくる」を実現するため、AI活用においても以下の3つの基本理念を尊重します。</p>
+
+      <h4>1. 人間の尊厳が尊重される活用（Dignity）</h4>
+      <p>AIを活用して効率性や利便性を追求するあまり、人間がAIに過度に依存したり、人間の行動をコントロールすることにAIを利用する活用は行いません。AIは人間の能力を拡張し、社員一人ひとりがより創造的な仕事に従事できるようにするためのツールとして位置づけます。</p>
+
+      <h4>2. 多様な幸せを追求できる活用（Diversity and Inclusion）</h4>
+      <p>当社のコアバリュー「小さな幸せ」（経済的成功、自己成長、誇り）と「大きな幸せ」（他者への貢献、地域課題の解決）の両立を、AI活用においても追求します。多様な背景を持つお客様・社員が、それぞれの幸せを追求できるようAIを活用します。</p>
+
+      <h4>3. 持続可能な地域社会への貢献（Sustainability）</h4>
+      <p>AI活用により、市場縮小と人手不足という地域課題の解決に貢献します。建設業界の労働力不足に対応しつつ、品質と生産性を両立する仕組みをAIで構築し、持続可能な地域社会のインフラ企業を目指します。</p>
+
+      <h3 id="principle-list">B. 原則</h3>
+      <p>上記の基本理念を実現するため、当社は以下の原則に基づいてAIを活用します。</p>
+
+      <ol class="principles">
+        <li><strong>人間中心の原則</strong>：AIは人間の判断を支援するツールであり、最終的な意思決定は人間が行う</li>
+        <li><strong>安全性の確保</strong>：ステークホルダーの生命・身体・財産に危害を及ぼさないようAIを活用する</li>
+        <li><strong>公平性の確保</strong>：特定の個人・集団に対する不当な差別や偏見を生まないようAIを活用する</li>
+        <li><strong>透明性の確保</strong>：AI活用について必要な情報をステークホルダーに提供する</li>
+        <li><strong>アカウンタビリティ</strong>：AI活用について説明責任を果たす</li>
+      </ol>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- 第3部 共通の指針 -->
+    <section class="section" id="guidelines">
+      <span class="section-number">PART 3</span>
+      <h2>第3部 共通の指針</h2>
+      <p>当社においてAIを開発・提供・利用する全ての役職員は、以下の指針を遵守します。</p>
+
+      <!-- 1. 人間中心 -->
+      <h3 id="g-human">1. 人間中心</h3>
+
+      <h4>1-1. 人間の尊厳及び個人の自律</h4>
+      <ul>
+        <li>AI活用において、お客様・社員の尊厳および個人の自律を尊重する</li>
+        <li>住宅設計、相続コンサル等において、お客様の意思決定を尊重し、AIの出力を押し付けない</li>
+      </ul>
+      <div class="callout">
+        <strong>重要</strong>
+        人事評価、採用選考等においてAIを積極的に活用することは推奨するが、最終判断は必ず人間が行う。AIは判断の参考情報・効率化ツールとして活用し、合否・評価の決定権限は人間が持つ。
+      </div>
+
+      <h4>1-2. AIによる意思決定・感情の操作等への留意</h4>
+      <ul>
+        <li>お客様や社員の意思決定、感情を不当に操作することを目的としたAI活用は行わない</li>
+        <li>AI出力に過度に依存する「自動化バイアス」のリスクに注意を払う</li>
+        <li>営業活動においてAIを活用する場合も、誠実な情報提供を基本とする</li>
+      </ul>
+
+      <h4>1-3. 偽情報等への対策</h4>
+      <ul>
+        <li>生成AIが事実と異なる情報（ハルシネーション）を出力する可能性を認識する</li>
+        <li>AI生成コンテンツを対外発信する前に、必ず人間によるファクトチェックを行う</li>
+        <li>建築・不動産・相続に関する法的・技術的情報は、専門家の確認を経てから活用する</li>
+      </ul>
+
+      <h4>1-4. 多様性・包摂性の確保と利用者支援</h4>
+      <ul>
+        <li>AIを活用することで「情報弱者」「技術弱者」を生じさせない</li>
+        <li>AI活用に不慣れな社員・協力会社に対して、適切な教育・サポートを提供する</li>
+        <li>お客様対応においては、AIを好まないお客様にも代替手段を提供する</li>
+        <li>AIシステムの機能・限界について、利用者に適切な情報を提供する</li>
+        <li>エラー発生時の対処方法を明確にし、サポート体制を整備する</li>
+      </ul>
+
+      <!-- 2. 安全性 -->
+      <h3 id="g-safety">2. 安全性</h3>
+
+      <h4>2-1. 人間の生命・身体・財産への配慮</h4>
+      <ul>
+        <li>建築設計・施工管理においてAIを活用する場合、人命に関わる安全性を最優先する</li>
+        <li>AIの出力は参考情報として扱い、構造計算・安全確認は必ず有資格者が行う</li>
+        <li>AI出力に起因するエラーが発見された場合、速やかに対処する体制を整備する</li>
+      </ul>
+
+      <h4>2-2. 適正利用</h4>
+      <ul>
+        <li>AIシステム・サービスを本来の目的から逸脱した方法で利用しない</li>
+        <li>利用規約・ライセンス条件を遵守する</li>
+        <li>生成AIで作成したプログラムコード等は、セキュリティ・品質を確認してから使用する</li>
+      </ul>
+
+      <h4>2-3. 適正学習</h4>
+      <ul>
+        <li>社内AIシステムの学習に使用するデータは、適法に取得したものに限る</li>
+        <li>個人情報・機密情報の取り扱いについて、関連法令および社内規程を遵守する</li>
+        <li>著作権・知的財産権を侵害するコンテンツを学習データに含めない</li>
+      </ul>
+
+      <h4>2-4. 持続可能性への配慮</h4>
+      <ul>
+        <li>AI活用による環境負荷にも配慮する（計算量の最適化、適切なモデル選択等）</li>
+      </ul>
+
+      <!-- 3. 公平性 -->
+      <h3 id="g-fairness">3. 公平性</h3>
+
+      <h4>3-1. バイアスへの配慮</h4>
+      <ul>
+        <li>AI出力に不当なバイアス（性別、年齢、国籍等による差別）が含まれていないか注意する</li>
+        <li>顧客対応においてAIを活用する場合、特定の顧客層を不当に差別しない</li>
+      </ul>
+
+      <h4>3-2. 人間の判断の介在</h4>
+      <ul>
+        <li>AI出力が公平性を欠く可能性がある場面では、人間の判断を介在させる</li>
+        <li>重要な意思決定においては、AI出力を鵜呑みにせず、独自に判断根拠を検討する</li>
+      </ul>
+
+      <!-- 4. プライバシー保護 -->
+      <h3 id="g-privacy">4. プライバシー保護</h3>
+
+      <h4>4-1. 個人情報保護</h4>
+      <ul>
+        <li>個人情報保護法その他関連法令を遵守する</li>
+        <li>お客様の個人情報をAIシステムに入力する場合、利用目的の範囲内で行う</li>
+        <li>生成AIサービスへの個人情報入力は、当該サービスの利用規約・プライバシーポリシーを確認し、適切な場合に限る</li>
+      </ul>
+
+      <h4>4-2. 機密情報の保護</h4>
+      <ul>
+        <li>業務上の機密情報を外部の生成AIサービスに入力する場合、情報漏洩リスクを考慮する</li>
+        <li>ビジネス利用向け（エンタープライズグレード）のAIサービスを優先的に使用する</li>
+      </ul>
+
+      <!-- 5. セキュリティ確保 -->
+      <h3 id="g-security">5. セキュリティ確保</h3>
+
+      <h4>5-1. セキュリティ対策</h4>
+      <ul>
+        <li>AIシステムの機密性・完全性・可用性を維持するため、適切なセキュリティ対策を講じる</li>
+        <li>AIシステムへの不正アクセス・データ改ざんを防止する体制を整備する</li>
+        <li>社内承認されていないAIツール（シャドーAI）の使用を禁止する</li>
+      </ul>
+
+      <h4>5-2. 最新動向への留意</h4>
+      <ul>
+        <li>AIシステムに対する攻撃手法（プロンプトインジェクション等）の最新動向を把握する</li>
+        <li>セキュリティ上の脆弱性が発見された場合、速やかに対応する</li>
+      </ul>
+
+      <!-- 6. 透明性・説明責任 -->
+      <h3 id="g-transparency">6. 透明性・説明責任</h3>
+
+      <h4>6-1. 記録・検証</h4>
+      <ul>
+        <li>重要な業務判断にAIを活用した場合、その過程・根拠を記録する</li>
+        <li>AI活用に関する意思決定・運用状況を追跡可能な状態で記録する</li>
+        <li>AI出力の品質維持・向上のため、定期的な検証を行う</li>
+        <li>問題発生時に原因究明・再発防止が可能な体制を整備する</li>
+      </ul>
+
+      <h4>6-2. 情報提供と誠実な対応</h4>
+      <ul>
+        <li>お客様に対し、AIを活用している業務について適切に情報提供する</li>
+        <li>社員に対し、AI活用に関する教育・情報提供を行う</li>
+        <li>AI活用の限界・リスクについても誠実に説明する</li>
+        <li>営業秘密・知的財産を保護しつつ、合理的な範囲で透明性を確保する</li>
+        <li>ステークホルダーからの問い合わせには誠実に対応する</li>
+      </ul>
+
+      <h4>6-3. 責任体制と文書化</h4>
+      <ul>
+        <li>AI活用に関する責任者を明確にする</li>
+        <li>本ガイドラインに関する問い合わせ窓口を設置する</li>
+        <li>AI活用に関するポリシー、運用手順、インシデント対応等を文書化する</li>
+        <li>記録は適切な期間保管し、必要時に参照可能な状態とする</li>
+      </ul>
+
+      <!-- 7. 教育・リテラシー -->
+      <h3 id="g-education">7. 教育・リテラシー</h3>
+      <ul>
+        <li>AIリテラシー教育を推進し、継続的なリスキリングに努める</li>
+        <li>具体的な研修プログラム・教育施策については、<a href="#gov-education">第5部C「教育・研修」</a>を参照</li>
+      </ul>
+
+      <!-- 8. 公正競争・イノベーション -->
+      <h3 id="g-competition">8. 公正競争・イノベーション</h3>
+      <ul>
+        <li>AIを活用した新たなビジネス・サービスの創出において、公正な競争環境を維持する</li>
+        <li>競合他社の営業秘密・知的財産を侵害する目的でAIを使用しない</li>
+        <li>業界団体・研究機関との連携を通じて、AIイノベーションを推進する</li>
+        <li>「建築AI経営研究会」を通じて、業界全体のAI活用水準向上に貢献する</li>
+        <li>業界発展のためにAI活用ノウハウを積極的に共有し、自社は絶え間ないイノベーションで常に先を行く</li>
+      </ul>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- 第4部 AI活用の類型と留意事項 -->
+    <section class="section" id="categories">
+      <span class="section-number">PART 4</span>
+      <h2>第4部 当社におけるAI活用の類型と留意事項</h2>
+
+      <h3 id="cat-user">A. AI利用者としての当社</h3>
+      <p>当社が外部のAIサービス（ChatGPT、Claude、Cursor、Gemini等）を業務に活用する場合の留意事項です。</p>
+
+      <h4>1. 利用可能なAIツール</h4>
+      <p>当社において業務利用が承認されたAIツールは以下の通りです。</p>
+
+      <h5>全社員に有償アカウント付与済み</h5>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>ツール</th><th>提供元</th><th>主な用途</th></tr></thead>
+          <tbody>
+            <tr><td>Gemini</td><td>Google</td><td>Workspace連携・汎用AI</td></tr>
+            <tr><td>NotebookLM</td><td>Google</td><td>情報整理・分析</td></tr>
+            <tr><td>Google AI Studio</td><td>Google</td><td>アプリ開発・API利用</td></tr>
+            <tr><td>AntiGravity</td><td>Google</td><td>AIエージェント型開発</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h5>業務利用が承認されたAIツール</h5>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>ツール</th><th>提供元</th><th>主な用途</th></tr></thead>
+          <tbody>
+            <tr><td>ChatGPT</td><td>OpenAI</td><td>汎用AI</td></tr>
+            <tr><td>Claude</td><td>Anthropic</td><td>汎用AI</td></tr>
+            <tr><td>Cursor</td><td>Anysphere</td><td>開発業務</td></tr>
+            <tr><td>Perplexity</td><td>Perplexity</td><td>質問応答検索</td></tr>
+            <tr><td>Grok</td><td>xAI</td><td>汎用AI</td></tr>
+            <tr><td>Loom</td><td>Loom</td><td>動画メッセージ・AI要約</td></tr>
+            <tr><td>tl;dv</td><td>tl;dv</td><td>会議録画・AI議事録</td></tr>
+            <tr><td>PLAUD Web</td><td>PLAUD</td><td>AI議事録</td></tr>
+            <tr><td>Notta</td><td>Notta</td><td>AI議事録</td></tr>
+            <tr><td>GenSpark</td><td>GenSpark</td><td>AI検索</td></tr>
+            <tr><td>Manus</td><td>Manus</td><td>AIエージェント</td></tr>
+            <tr><td>Zapier</td><td>Zapier</td><td>自動化ワークフロー</td></tr>
+            <tr><td>Canva</td><td>Canva</td><td>デザイン</td></tr>
+            <tr><td>Notion</td><td>Notion</td><td>DB・ドキュメント管理</td></tr>
+            <tr><td>Kling</td><td>Kling</td><td>動画生成</td></tr>
+            <tr><td>Sora2</td><td>OpenAI</td><td>動画生成</td></tr>
+            <tr><td>Mapify</td><td>Mapify</td><td>マインドマップ</td></tr>
+            <tr><td>Freepik AI</td><td>Freepik</td><td>画像生成</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">上記以外の有償AIツールを業務利用する場合は、1-2「<a href="#ai-tool-application">AIツール利用申請</a>」により申請すること。無償ツールは申請不要です</div>
+
+      <h4 id="ai-tool-application">1-2. AIツール利用申請</h4>
+      <p>有償AIツールの利用には申請が必要です。上記の承認済みツールについて有償アカウントの取得を希望する場合、または承認済みリストに記載のない有償ツールを新規導入したい場合は、以下の統合申請フローに従って申請してください。なお、Google系AI（Gemini、NotebookLM、Google AI Studio、AntiGravity）は全社員に有償アカウントが付与済みのため、申請不要です。無償ツールの利用についても申請は不要です。</p>
+
+      <h5>申請の種類</h5>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>申請種類</th><th>対象</th><th>例</th></tr></thead>
+          <tbody>
+            <tr><td>新規ツール利用</td><td>承認済みリストに記載のないAIツールを業務で使いたい場合</td><td>新しいAIサービスの導入</td></tr>
+            <tr><td>有償アカウント</td><td>承認済みツールの有償プランを利用したい場合</td><td>Claude Pro、Cursor Business 等</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h5>統合申請フロー</h5>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-num">1</div>
+          <div class="flow-step-title">フォーム申請</div>
+          <div class="flow-step-desc">申請者がGoogleフォームから申請を送信</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">2</div>
+          <div class="flow-step-title">所属長審査</div>
+          <div class="flow-step-desc">業務上の必要性・費用対効果を審査し承認/却下を判断</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">3</div>
+          <div class="flow-step-title">技術・セキュリティ確認</div>
+          <div class="flow-step-desc">AI活用推進担当がセキュリティ・利用規約・技術面を確認</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">4</div>
+          <div class="flow-step-title">最終承認</div>
+          <div class="flow-step-desc">新規ツールの場合、AI活用推進責任者が最終承認</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">5</div>
+          <div class="flow-step-title">通知・発行</div>
+          <div class="flow-step-desc">承認結果を通知、アカウント発行手続き</div>
+        </div>
+      </div>
+
+      <div class="note">有償アカウント申請は、STEP 3までの承認で完了します（STEP 4は新規ツールの場合のみ）。</div>
+
+      <h5>審査基準</h5>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>審査観点</th><th>確認事項</th></tr></thead>
+          <tbody>
+            <tr><td>業務必要性</td><td>当該ツールがなければ業務遂行が困難か、または大幅な効率化が見込めるか</td></tr>
+            <tr><td>費用対効果</td><td>投資に見合う効果が期待できるか</td></tr>
+            <tr><td>セキュリティ</td><td>情報漏洩リスクは許容範囲内か、利用規約・プライバシーポリシーに問題はないか</td></tr>
+            <tr><td>代替手段</td><td>既存の承認済みツール（特にGoogle系AI）で代替できないか</td></tr>
+            <tr><td>活用能力</td><td>申請者がツールを使いこなすための十分な技能・知識・AIリテラシーを有し、投資に見合う成果を出せる見込みがあるか</td></tr>
+            <tr><td>技術適合性</td><td>既存の社内システム・ワークフローとの整合性があるか（新規ツールの場合）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h5>留意事項</h5>
+      <ul>
+        <li><strong>新規ツール導入の場合</strong>：承認済みリストに記載のないツールを新規導入する場合は、セキュリティ・利用規約の詳細確認が必要なため、承認まで1〜2週間程度かかる場合があります</li>
+        <li><strong>試用推奨</strong>：費用対効果が不明確な場合、まずは無償プランでの試用期間（1ヶ月程度）を設け、効果検証後に有償アカウントを申請することを推奨します</li>
+        <li><strong>退職・異動時の手続き</strong>：退職・異動時は、アカウントの引継ぎまたは解約手続きを必ず行ってください。所属長は部下の異動・退職時にアカウント状況を確認する責任を負います</li>
+        <li><strong>申請記録の保管</strong>：承認済み申請記録はAI活用推進担当が3年間保管します</li>
+      </ul>
+
+      <div class="apply-btn-wrapper">
+        <p>有償AIツールの新規利用・有償アカウントの申請は、以下のGoogleフォームから行ってください。</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc-g4NMxu5Gc2nSBoK-c3zkh9FYyYIaDlLe6BPeAD4J0hRshA/viewform" class="apply-btn" target="_blank" rel="noopener noreferrer">AIツール利用申請フォーム</a>
+      </div>
+
+      <h4>2. 入力してはならない情報</h4>
+      <div class="callout callout-danger">
+        <strong>禁止事項</strong>
+        以下の情報は、外部AIサービスへの入力を禁止します。
+      </div>
+      <ul>
+        <li>お客様の個人情報（氏名、住所、電話番号、金融情報等）</li>
+        <li>契約書・見積書等の機密文書（原文のまま）</li>
+        <li>社員の人事情報</li>
+        <li>未発表の経営計画・事業戦略</li>
+        <li>協力会社との取引条件・原価情報</li>
+      </ul>
+
+      <h4>3. AI出力の確認義務</h4>
+      <p>以下の場面では、AI出力を対外発信・業務使用する前に確認義務があります：</p>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>用途</th><th>確認者</th></tr></thead>
+          <tbody>
+            <tr><td>建築設計・構造計算</td><td>一級建築士または二級建築士</td></tr>
+            <tr><td>法的助言・相続相談</td><td>顧問弁護士（長野法律事務所 長野修一）・顧問税理士（SS総合会計 鈴木宏典）</td></tr>
+            <tr><td>契約書作成</td><td>顧問弁護士または所属長</td></tr>
+            <tr><td>対外広報・マーケティング</td><td>マーケティング課 宇田身エ子</td></tr>
+            <tr><td>採用選考・人事評価</td><td>組織人事課 川島隆義</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>4. 禁止される利用</h4>
+      <div class="callout callout-danger">
+        <strong>禁止事項</strong>
+        以下のAI利用は禁止します。
+      </div>
+      <ul>
+        <li>虚偽情報・誤解を招く情報の生成</li>
+        <li>他者の著作権・知的財産権を侵害するコンテンツの生成</li>
+        <li>差別的・有害なコンテンツの生成</li>
+        <li>業務と無関係な個人的利用（業務時間中）</li>
+      </ul>
+
+      <!-- B. AI提供者としての当社 -->
+      <h3 id="cat-provider">B. AI提供者としての当社</h3>
+      <p>当社が「建築AI経営研究会」等を通じて、AIノウハウ・サービスを外部に提供する場合の留意事項です。</p>
+
+      <h4>1. 提供サービスの品質管理</h4>
+      <ul>
+        <li>提供するAI活用ノウハウ・ツールの品質を適切に管理する</li>
+        <li>サービスの能力・限界について正確に説明する</li>
+        <li>会員企業への適切なサポート体制を整備する</li>
+      </ul>
+
+      <h4>2. 利用規約・免責事項</h4>
+      <ul>
+        <li>サービス利用規約を整備し、責任範囲を明確にする</li>
+        <li>AI出力の正確性に関する免責事項を適切に設定する</li>
+        <li>プライバシーポリシーを整備し、公開する</li>
+      </ul>
+
+      <h4>3. 会員企業への情報提供</h4>
+      <ul>
+        <li>AI活用のリスク・留意事項について情報提供する</li>
+        <li>本ガイドラインの趣旨を会員企業にも共有する</li>
+      </ul>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- 第5部 AIガバナンス体制 -->
+    <section class="section" id="governance">
+      <span class="section-number">PART 5</span>
+      <h2>第5部 AIガバナンス体制</h2>
+
+      <h3 id="gov-org">A. 組織体制</h3>
+
+      <h4>1. AI活用推進責任者</h4>
+      <p>当社のAI活用全般を統括する責任者として、代表取締役社長がAI活用推進責任者を務めます。</p>
+      <p><strong>責務：</strong></p>
+      <ul>
+        <li>本ガイドラインの策定・改定</li>
+        <li>AI活用に関する重要事項の意思決定</li>
+        <li>AIガバナンス全体の監督</li>
+      </ul>
+
+      <h4>2. 各部門責任者</h4>
+      <p>各事業部門（住宅/不動産/相続/AI）の責任者は、当該部門におけるAI活用の適正性を確保する責任を負います。</p>
+      <p><strong>責務：</strong></p>
+      <ul>
+        <li>部門内のAI活用状況の把握</li>
+        <li>本ガイドライン遵守の徹底</li>
+        <li>インシデント発生時の初動対応</li>
+      </ul>
+
+      <h4>3. AI活用推進担当</h4>
+      <p>AI活用の推進および本ガイドラインの運用を担当する社員として、<strong>経営戦略室 石野祐太朗</strong> を配置します。</p>
+      <p><strong>責務：</strong></p>
+      <ul>
+        <li>AI活用に関する相談対応</li>
+        <li>教育・研修の企画・実施</li>
+        <li>AIツールの評価・選定支援</li>
+        <li>有償アカウント申請の審査・発行手続き</li>
+      </ul>
+
+      <h3 id="gov-process">B. 運用プロセス</h3>
+
+      <h4>1. 新規AI導入の承認プロセス</h4>
+      <p>新たなAIツール・サービスの導入、有償アカウントの取得については、<a href="#ai-tool-application">第4部 A. 1-2「AIツール利用申請」</a>の統合申請フローに従って申請してください。</p>
+
+      <h4>2. 定期的な見直し</h4>
+      <ul>
+        <li>本ガイドラインは年1回以上見直しを行う</li>
+        <li>AI技術・社会環境の変化に応じて適宜改定する</li>
+        <li>改定履歴を記録・保管する</li>
+      </ul>
+
+      <h4>3. インシデント対応</h4>
+      <p>AI活用に起因するインシデントが発生した場合、速やかに報告・対応を行います。</p>
+
+      <h5>インシデントの例</h5>
+      <ul>
+        <li><span class="badge badge-severe">重大</span> 個人情報・機密情報の漏洩、著作権侵害、顧客からのクレーム</li>
+        <li><span class="badge badge-minor">軽微</span> AI出力の軽微なエラー、社内での誤操作（外部影響なし）</li>
+      </ul>
+
+      <h5>対応フロー</h5>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-num">1</div>
+          <div class="flow-step-title">報告</div>
+          <div class="flow-step-desc">発見者が所属長およびAI活用推進担当に直ちに報告</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">2</div>
+          <div class="flow-step-title">初動対応</div>
+          <div class="flow-step-desc">AI活用推進担当が状況把握・初動対応を実施</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">3</div>
+          <div class="flow-step-title">経営報告</div>
+          <div class="flow-step-desc">重大インシデントの場合、代表取締役社長に報告</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">4</div>
+          <div class="flow-step-title">再発防止</div>
+          <div class="flow-step-desc">原因究明・再発防止策を策定し関係者に共有</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>違反時の対応</strong>
+        本ガイドラインに違反した場合、その内容・程度に応じて注意・指導を行います。重大な違反については、就業規則に基づく対応の対象となる場合があります。
+      </div>
+
+      <h3 id="gov-education">C. 教育・研修</h3>
+
+      <h4>1. 全社員向け研修</h4>
+      <p>当社では「ホリエモンAI学校」のEラーニングを活用し、AI教育を実施しています。</p>
+      <ul>
+        <li><strong>入社時</strong>：AIリテラシー基礎研修（本ガイドライン含む）</li>
+        <li><strong>定期</strong>：Eラーニングによる継続学習（各自のペースで受講）</li>
+      </ul>
+
+      <h4>2. 研修内容</h4>
+      <ul>
+        <li>AI活用の基礎知識</li>
+        <li>生成AIの適切な使い方</li>
+        <li>セキュリティ・プライバシーに関する注意事項</li>
+        <li>業務への応用スキル</li>
+      </ul>
+
+      <h4>3. 継続的なリスキリング</h4>
+      <ul>
+        <li>AIと人間の作業の棲み分けは技術進歩に伴い変化するため、継続的な教育・リスキリングを推進する</li>
+        <li>役職・担当に応じた研修プログラムを整備し、全役職員のAI活用能力の向上を図る</li>
+      </ul>
+
+      <h4>4. 業界への教育貢献</h4>
+      <ul>
+        <li>「建築AI経営研究会」を通じて、協力会社・業界への教育機会を提供する</li>
+        <li>業界全体のAI活用水準向上に貢献し、持続可能な建設業界の発展に寄与する</li>
+      </ul>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- 第6部 附則 -->
+    <section class="section" id="appendix">
+      <span class="section-number">PART 6</span>
+      <h2>第6部 附則</h2>
+
+      <h3>施行日</h3>
+      <p>本ガイドラインは、2026年2月4日より施行します。</p>
+
+      <h3>改定履歴</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>版</th><th>改定日</th><th>改定内容</th></tr></thead>
+          <tbody>
+            <tr><td>1.0</td><td>2026年2月4日</td><td>初版策定</td></tr>
+            <tr><td>1.1</td><td>2026年3月3日</td><td>AIツール統合利用申請フローの追加</td></tr>
+            <tr><td>1.2</td><td>2026年3月3日</td><td>ガイドライン全体の構成最適化・重複整理</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>問い合わせ先</h3>
+      <p>本ガイドラインに関するお問い合わせは、AI活用推進担当（経営戦略室 石野祐太朗）までご連絡ください。</p>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- 参考資料 -->
+    <section class="section" id="references">
+      <span class="section-number">REFERENCES</span>
+      <h2>参考資料</h2>
+      <p>本ガイドラインは、以下の資料を参考に策定しました：</p>
+      <ol>
+        <li>総務省・経済産業省「AI事業者ガイドライン（第1.1版）」（令和7年3月28日）</li>
+        <li>一般社団法人日本ディープラーニング協会「生成AIの利用ガイドライン」</li>
+        <li>個人情報保護委員会「生成AIサービスの利用に関する注意喚起等」</li>
+      </ol>
+    </section>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-logo"><img src="logo_footer.png" alt="LIFEFUND"></div>
+  <div class="footer-company">株式会社LIFEFUND</div>
+  <div class="footer-name">代表取締役社長 白都 卓磨</div>
+  <p>&copy; 2026 LIFEFUND Inc. All rights reserved.</p>
+</footer>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="backToTop" aria-label="ページトップへ戻る">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+<script>
+(function() {
+  const btn = document.getElementById('backToTop');
+  window.addEventListener('scroll', function() {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  const tocLinks = document.querySelectorAll('.toc-list a');
+  const sections = [];
+  tocLinks.forEach(function(link) {
+    const id = link.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.querySelector(id);
+      if (el) sections.push({ el: el, link: link });
+    }
+  });
+
+  function updateToc() {
+    let current = null;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].el.getBoundingClientRect().top <= 100) {
+        current = sections[i];
+        break;
+      }
+    }
+    tocLinks.forEach(function(l) { l.classList.remove('active'); });
+    if (current) current.link.classList.add('active');
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() { updateToc(); ticking = false; });
+      ticking = true;
+    }
+  });
+  updateToc();
+})();
+</script>
+
+</body>
+</html>

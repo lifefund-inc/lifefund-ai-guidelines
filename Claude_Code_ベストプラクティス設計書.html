@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code ベストプラクティス基本設計書 | LIFEFUND Corporation</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@500;700&family=DM+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-navy: #1a1a2e;
+  --color-navy-light: #16213e;
+  --color-navy-accent: #0f3460;
+  --color-gold: #8b7355;
+  --color-gold-light: #a8956f;
+  --color-bg: #ffffff;
+  --color-bg-warm: #f7f3ee;
+  --color-bg-light: #fafafa;
+  --color-text: #2c2c2c;
+  --color-text-light: #6b6b6b;
+  --color-border: #e0e0e0;
+  --color-border-light: #f0f0f0;
+  --color-indigo: #6366f1;
+  --color-green: #059669;
+  --color-red: #dc2626;
+  --color-amber: #d97706;
+  --font-sans: 'Noto Sans JP', sans-serif;
+  --font-serif: 'Noto Serif JP', serif;
+  --font-num: 'DM Sans', sans-serif;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.08);
+  --radius: 8px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); color: var(--color-text); background: var(--color-bg); line-height: 1.8; font-size: 0.92rem; }
+
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--color-navy);
+  color: #fff;
+  height: 60px;
+  display: flex; align-items: center; padding: 0 32px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+.header-logo { font-family: var(--font-num); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; opacity: 0.7; }
+.header-title { font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem; margin-left: 20px; }
+
+/* Layout */
+.layout { display: flex; min-height: calc(100vh - 60px); }
+
+/* Sidebar */
+.sidebar {
+  width: 260px; min-width: 260px;
+  background: var(--color-bg-light);
+  border-right: 1px solid var(--color-border);
+  padding: 24px 0;
+  position: sticky; top: 60px; height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+.sidebar-section { padding: 0 20px; margin-bottom: 8px; }
+.sidebar-label {
+  font-size: 0.7rem; font-weight: 700; color: var(--color-text-light);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+.sidebar a {
+  display: block; padding: 6px 20px;
+  color: var(--color-text); text-decoration: none;
+  font-size: 0.85rem; border-left: 3px solid transparent;
+  transition: all 0.2s;
+}
+.sidebar a:hover { background: var(--color-bg-warm); border-left-color: var(--color-gold); color: var(--color-gold); }
+.sidebar .version {
+  padding: 16px 20px; margin-top: 16px;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.75rem; color: var(--color-text-light);
+}
+
+/* Main Content */
+.main { flex: 1; max-width: 900px; padding: 40px 48px; }
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--color-navy), var(--color-navy-accent));
+  color: #fff; padding: 48px 40px; border-radius: var(--radius);
+  margin-bottom: 40px; position: relative; overflow: hidden;
+}
+.hero::after {
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,.02) 20px, rgba(255,255,255,.02) 40px);
+}
+.hero-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; color: var(--color-gold-light); margin-bottom: 8px; position: relative; z-index: 1; }
+.hero h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; margin-bottom: 12px; position: relative; z-index: 1; }
+.hero p { font-size: 0.95rem; opacity: 0.85; position: relative; z-index: 1; line-height: 1.7; }
+
+/* Sections */
+.section { margin-bottom: 48px; }
+.section-num {
+  font-family: var(--font-num); font-size: 0.7rem; font-weight: 700;
+  color: var(--color-gold); letter-spacing: 0.15em; margin-bottom: 4px;
+}
+.section h2 {
+  font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700;
+  color: var(--color-navy); margin-bottom: 16px;
+  padding-bottom: 12px; border-bottom: 2px solid var(--color-border-light);
+}
+.section h3 {
+  font-size: 1.05rem; font-weight: 700; color: var(--color-navy-light);
+  margin: 24px 0 12px; padding-left: 12px;
+  border-left: 3px solid var(--color-gold);
+}
+
+/* Cards */
+.card {
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius); padding: 24px; margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.card-accent {
+  border-left: 4px solid var(--color-gold); background: var(--color-bg-warm);
+}
+.card-important {
+  border-left: 4px solid var(--color-red); background: #fef2f2;
+}
+.card-tip {
+  border-left: 4px solid var(--color-green); background: #f0fdf4;
+}
+.card-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.88rem; }
+th { background: var(--color-bg-light); font-weight: 700; text-align: left; padding: 10px 14px; border: 1px solid var(--color-border); font-size: 0.82rem; }
+td { padding: 10px 14px; border: 1px solid var(--color-border); vertical-align: top; }
+tr:hover td { background: #fafbfd; }
+
+/* Code */
+code {
+  font-family: 'Consolas', 'Monaco', monospace;
+  background: #f3f4f6; padding: 2px 6px; border-radius: 4px;
+  font-size: 0.85em; color: var(--color-navy-accent);
+}
+pre {
+  background: var(--color-navy); color: #e2e8f0;
+  padding: 20px 24px; border-radius: var(--radius);
+  overflow-x: auto; font-size: 0.82rem; line-height: 1.6;
+  margin: 16px 0;
+}
+pre code { background: none; color: inherit; padding: 0; }
+
+/* Utility */
+.badge {
+  display: inline-block; padding: 2px 10px; border-radius: 99px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em;
+}
+.badge-must { background: #fee2e2; color: var(--color-red); }
+.badge-should { background: #fef3c7; color: var(--color-amber); }
+.badge-nice { background: #dbeafe; color: #2563eb; }
+.badge-official { background: #f0fdf4; color: var(--color-green); }
+
+ul, ol { padding-left: 24px; margin: 8px 0; }
+li { margin-bottom: 6px; }
+p { margin-bottom: 12px; }
+strong { color: var(--color-navy); }
+.text-sm { font-size: 0.82rem; color: var(--color-text-light); }
+.mt-2 { margin-top: 16px; }
+.mb-2 { margin-bottom: 16px; }
+.divider { border: none; border-top: 1px solid var(--color-border-light); margin: 32px 0; }
+
+/* Principle Cards */
+.principles { display: grid; gap: 16px; }
+.principle {
+  display: flex; gap: 16px; padding: 20px;
+  background: var(--color-bg); border: 1px solid var(--color-border);
+  border-radius: var(--radius); box-shadow: var(--shadow-sm);
+}
+.principle-num {
+  font-family: var(--font-num); font-size: 1.8rem; font-weight: 900;
+  color: var(--color-gold); min-width: 40px; line-height: 1;
+}
+.principle-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+.principle-desc { font-size: 0.85rem; color: var(--color-text-light); }
+
+/* Tree */
+.tree { font-family: 'Consolas', monospace; font-size: 0.82rem; line-height: 1.8; }
+.tree .folder { color: var(--color-indigo); font-weight: 700; }
+.tree .file { color: var(--color-text-light); }
+.tree .comment { color: var(--color-gold); font-family: var(--font-sans); font-size: 0.78rem; }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .sidebar { display: none; }
+  .main { padding: 24px 20px; }
+  .hero { padding: 32px 24px; }
+  .hero h1 { font-size: 1.5rem; }
+}
+
+/* Print */
+@media print {
+  .header { position: static; }
+  .sidebar { display: none; }
+  .main { max-width: 100%; padding: 20px; }
+  .hero { break-inside: avoid; }
+  .section { break-inside: avoid; }
+  pre { white-space: pre-wrap; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-logo">LIFEFUND CORPORATION</span>
+  <span class="header-title">Claude Code ベストプラクティス基本設計書</span>
+</div>
+
+<div class="layout">
+
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-label">Contents</div>
+  </div>
+  <a href="#overview">概要・目的</a>
+  <a href="#principles">5つの基本原則</a>
+  <a href="#folder">フォルダ設計</a>
+  <a href="#claude-md">CLAUDE.mdの書き方</a>
+  <a href="#rules">rules/の活用</a>
+  <a href="#context">コンテキスト管理</a>
+  <a href="#operation">運用ルール</a>
+  <a href="#template">テンプレート</a>
+  <a href="#checklist">導入チェックリスト</a>
+  <div class="version">
+    ver 1.0 | 2026.04.03<br>
+    作成: 白都卓磨 + Claude Code
+  </div>
+</nav>
+
+<!-- Main Content -->
+<main class="main">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-label">BEST PRACTICES GUIDE</div>
+  <h1>Claude Code ベストプラクティス<br>基本設計書</h1>
+  <p>Anthropic公式ドキュメント・実運用経験に基づく、Claude Code作業環境の最適な設計指針。<br>CLAUDE.md・フォルダ構造・コンテキスト管理の社内標準を定める。</p>
+</div>
+
+<!-- Section 1: Overview -->
+<div class="section" id="overview">
+  <div class="section-num">SECTION 01</div>
+  <h2>概要・目的</h2>
+
+  <p>Claude CodeはAnthropicが提供するAIコーディングアシスタントのCLI。ターミナル上でAIと対話しながら、コード作成・ファイル操作・調査・分析などを行える。</p>
+
+  <div class="card card-accent">
+    <div class="card-title">この設計書の目的</div>
+    <p>Claude Codeの性能を最大限に引き出すには、<strong>作業環境の設計</strong>が極めて重要。特にCLAUDE.mdの書き方とフォルダ構造は、AIの精度・速度・コンテキスト効率に直結する。</p>
+    <p>本書はAnthropic公式ベストプラクティスおよび社内実運用の知見に基づき、全社員が同じ基準でClaude Codeを活用できるようにするものである。</p>
+  </div>
+
+  <div class="card card-important">
+    <div class="card-title">最重要の制約</div>
+    <p>Anthropic公式ドキュメントより:</p>
+    <blockquote style="border-left:3px solid var(--color-red); padding-left:12px; margin:8px 0; font-style:italic;">
+      「ほとんどのベストプラクティスは1つの制約に基づく: <strong>Claudeのコンテキストウィンドウはすぐに埋まり、埋まるほど性能が劣化する。</strong>」
+    </blockquote>
+    <p class="text-sm">つまり、不要な情報をロードしない設計が全ての基本になる。</p>
+  </div>
+</div>
+
+<!-- Section 2: Principles -->
+<div class="section" id="principles">
+  <div class="section-num">SECTION 02</div>
+  <h2>5つの基本原則</h2>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="principle-num">1</div>
+      <div>
+        <div class="principle-title">地図 > 構造</div>
+        <div class="principle-desc">フォルダ構造を複雑にするより、CLAUDE.mdにプロジェクト一覧（地図）を整備する方がAI精度が向上する。35リポジトリ運用の実事例で実証済み。</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">2</div>
+      <div>
+        <div class="principle-title">CLAUDE.mdは200行未満</div>
+        <div class="principle-desc">各行に「これを消すとClaudeが間違えるか？」テスト。Noなら削除。超えると指示遵守率が低下する。<span class="badge badge-official">公式推奨</span></div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">3</div>
+      <div>
+        <div class="principle-title">ルールは分離・条件付きロード</div>
+        <div class="principle-desc"><code>.claude/rules/</code>にルールを分離し、<code>paths</code>指定で必要な時だけロード。コンテキスト消費を最小化する。</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">4</div>
+      <div>
+        <div class="principle-title">重要ルールにはIMPORTANTを付与</div>
+        <div class="principle-desc">「間違えたら致命的」なルールには<code>**IMPORTANT**</code>マーカーを付けるとClaudeの遵守率が上がる。<span class="badge badge-official">公式推奨</span></div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">5</div>
+      <div>
+        <div class="principle-title">階層は3段まで</div>
+        <div class="principle-desc">4段超でAI・人間ともにナビゲーション効率が崩壊。迷う分類体系は作らず、フラット+地図で管理する。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Section 3: Folder Design -->
+<div class="section" id="folder">
+  <div class="section-num">SECTION 03</div>
+  <h2>フォルダ設計</h2>
+
+  <h3>推奨ディレクトリ構成</h3>
+
+  <div class="tree" style="background: var(--color-bg-light); padding: 24px; border-radius: var(--radius); border: 1px solid var(--color-border);">
+    <span class="folder">プロジェクトルート/</span><br>
+    ├── <span class="file">CLAUDE.md</span> <span class="comment">← 43行以下。環境・必須ルールのみ</span><br>
+    ├── <span class="file">CLAUDE.local.md</span> <span class="comment">← 個人設定（.gitignoreに追加）</span><br>
+    ├── <span class="folder">.claude/</span><br>
+    │&nbsp;&nbsp; ├── <span class="file">settings.json</span> <span class="comment">← チーム共有設定</span><br>
+    │&nbsp;&nbsp; ├── <span class="file">settings.local.json</span> <span class="comment">← ローカル設定（.gitignore）</span><br>
+    │&nbsp;&nbsp; ├── <span class="folder">rules/</span> <span class="comment">← パス指定可能なルールファイル群</span><br>
+    │&nbsp;&nbsp; │&nbsp;&nbsp; ├── <span class="file">project-map.md</span> <span class="comment">← プロジェクト一覧（pathsなし=毎回読込）</span><br>
+    │&nbsp;&nbsp; │&nbsp;&nbsp; ├── <span class="file">session-behavior.md</span> <span class="comment">← 行動ルール（pathsなし=毎回読込）</span><br>
+    │&nbsp;&nbsp; │&nbsp;&nbsp; ├── <span class="file">dashboard.md</span> <span class="comment">← ダッシュボード系（paths指定=条件付き）</span><br>
+    │&nbsp;&nbsp; │&nbsp;&nbsp; └── <span class="file">git.md</span> <span class="comment">← Git系（paths指定=条件付き）</span><br>
+    │&nbsp;&nbsp; └── <span class="folder">skills/</span> <span class="comment">← ワークフロー定義（オンデマンド読込）</span><br>
+    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; └── <span class="folder">my-skill/</span><br>
+    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; └── <span class="file">SKILL.md</span><br>
+    ├── <span class="folder">_archive/</span> <span class="comment">← 休止プロジェクト（フラット配置）</span><br>
+    ├── <span class="folder">プロジェクトA/</span> <span class="comment">← ルート直下にフラット配置</span><br>
+    ├── <span class="folder">プロジェクトB/</span><br>
+    └── ...
+  </div>
+
+  <h3>フォルダ設計のポイント</h3>
+
+  <table>
+    <tr><th width="30%">ポイント</th><th>説明</th></tr>
+    <tr><td><strong>プロジェクトはルート直下</strong></td><td>カテゴリフォルダに入れない。フラット配置 + CLAUDE.mdの地図でナビゲーション</td></tr>
+    <tr><td><strong>_archive/ で休止管理</strong></td><td>2ヶ月以上更新のないプロジェクトを退避。必要時にルートに戻す</td></tr>
+    <tr><td><strong>大規模リポは移動しない</strong></td><td>node_modules等で数万ファイルあるプロジェクトは、Dropbox同期リスクがあるため固定</td></tr>
+    <tr><td><strong>散在ファイルは親プロジェクトへ</strong></td><td>ルートに作業データを放置しない。該当プロジェクトのフォルダに収納</td></tr>
+  </table>
+</div>
+
+<!-- Section 4: CLAUDE.md -->
+<div class="section" id="claude-md">
+  <div class="section-num">SECTION 04</div>
+  <h2>CLAUDE.mdの書き方</h2>
+
+  <h3>書くべきもの <span class="badge badge-must">MUST</span></h3>
+  <table>
+    <tr><th width="35%">内容</th><th>例</th></tr>
+    <tr><td>Claudeが推測できないBashコマンド</td><td><code>py</code>（<code>python3</code>は使えない）</td></tr>
+    <tr><td>環境の癖</td><td>Pythonパス、OS固有設定、必要な環境変数</td></tr>
+    <tr><td>Git/PRの慣習</td><td>ブランチ命名、コミットメッセージ規約、push分割ルール</td></tr>
+    <tr><td>デプロイ方法</td><td>GitHub Pages、index.htmlリネームルール</td></tr>
+    <tr><td>間違えたら致命的なルール</td><td>ファイル削除の扱い、ファクトチェック必須</td></tr>
+    <tr><td>非自明なカスタム機能</td><td>スクリーンショット共有（ss機能）</td></tr>
+  </table>
+
+  <h3>書かないべきもの <span class="badge badge-nice">AVOID</span></h3>
+  <table>
+    <tr><th width="35%">内容</th><th>理由</th></tr>
+    <tr><td>Claudeがコードを読めばわかること</td><td>コンテキストの無駄遣い</td></tr>
+    <tr><td>標準的な言語規約</td><td>Claudeは既に知っている</td></tr>
+    <tr><td>詳細なAPIドキュメント</td><td>リンクで十分。<code>@path</code>でインポートも可</td></tr>
+    <tr><td>頻繁に変わる情報</td><td><code>.claude/rules/</code>に分離する</td></tr>
+    <tr><td>ファイルごとのコードベース説明</td><td>Claudeが自分で読める</td></tr>
+    <tr><td>「きれいなコードを書け」等の自明な指示</td><td>効果がなくノイズになる</td></tr>
+  </table>
+
+  <h3>書き方のコツ <span class="badge badge-official">公式推奨</span></h3>
+  <ul>
+    <li><strong>具体的に書く</strong>: 「適切にフォーマット」ではなく「2スペースインデント」</li>
+    <li><strong>マークダウンのヘッダー・箇条書き</strong>で構造化する</li>
+    <li>重要なルールには <code>**IMPORTANT**</code> や <code>**YOU MUST**</code> を付与</li>
+    <li><code>@path/to/file</code> 構文で外部ファイルをインポート可能（最大5ホップ）</li>
+    <li>HTMLコメント <code>&lt;!-- --&gt;</code> は除去されるため、人間向けメモに使える</li>
+    <li>定期的にレビューし、矛盾・古い情報を削除する</li>
+  </ul>
+
+  <div class="card card-tip">
+    <div class="card-title">判断テスト</div>
+    <p>CLAUDE.mdの各行に対して「<strong>これを削除するとClaudeが間違えるか？</strong>」と問う。Noなら削除するか、<code>.claude/rules/</code>に移動する。</p>
+  </div>
+</div>
+
+<!-- Section 5: Rules -->
+<div class="section" id="rules">
+  <div class="section-num">SECTION 05</div>
+  <h2>.claude/rules/ の活用</h2>
+
+  <h3>3種類の読み込みモード</h3>
+  <table>
+    <tr><th>配置</th><th>読み込み</th><th>用途</th></tr>
+    <tr>
+      <td><code>rules/</code> <strong>pathsなし</strong></td>
+      <td>毎セッション自動読込</td>
+      <td>プロジェクト地図、行動ルールなど全般的なもの</td>
+    </tr>
+    <tr>
+      <td><code>rules/</code> <strong>paths指定</strong></td>
+      <td>該当ファイル操作時のみ</td>
+      <td>言語別ルール、フレームワーク別ルール</td>
+    </tr>
+    <tr>
+      <td><code>skills/</code></td>
+      <td>オンデマンド（呼出時）</td>
+      <td>ドメイン知識、ワークフロー</td>
+    </tr>
+  </table>
+
+  <h3>paths指定の書き方</h3>
+  <pre><code>---
+description: ダッシュボード生成プロジェクトのルール
+paths:
+  - "AIナレッジバンク_サマリー/**"
+  - "LIFEFUND_経営分析ダッシュボード/**"
+  - "HRbrain_API連携/**"
+---
+- テンプレートベースでHTMLを生成する（ゼロから生成禁止）
+- ライトテーマ（白背景+インディゴアクセント）</code></pre>
+  <p class="text-sm">このルールは、上記3フォルダ内のファイルを操作する時だけ読み込まれる。それ以外の作業中はコンテキストを消費しない。</p>
+
+  <h3>パスパターンの例</h3>
+  <table>
+    <tr><th>パターン</th><th>マッチ対象</th></tr>
+    <tr><td><code>**/*.ts</code></td><td>全ディレクトリのTypeScriptファイル</td></tr>
+    <tr><td><code>src/**/*</code></td><td>src/ 以下の全ファイル</td></tr>
+    <tr><td><code>*.md</code></td><td>プロジェクトルートのMarkdownファイル</td></tr>
+    <tr><td><code>src/**/*.{ts,tsx}</code></td><td>ブレース展開で複数拡張子</td></tr>
+  </table>
+
+  <div class="card card-accent">
+    <div class="card-title">CLAUDE.md vs rules/ vs skills の使い分け</div>
+    <ul>
+      <li><strong>CLAUDE.md</strong>: 毎セッション必須。「消すとClaudeが間違える」ルール</li>
+      <li><strong>rules/（pathsなし）</strong>: 毎セッション読込。便利だが無くてもエラーにならないもの</li>
+      <li><strong>rules/（paths指定）</strong>: 条件付き読込。ファイル種別ごとのルール</li>
+      <li><strong>skills</strong>: オンデマンド読込。繰り返し使うワークフロー。500行未満推奨</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Section 6: Context Management -->
+<div class="section" id="context">
+  <div class="section-num">SECTION 06</div>
+  <h2>コンテキスト管理</h2>
+
+  <p>Claude Codeの性能は<strong>コンテキストウィンドウの使い方</strong>で決まる。以下の戦略を守ること。</p>
+
+  <h3>コンテキスト節約の5つの戦略 <span class="badge badge-official">公式推奨</span></h3>
+
+  <table>
+    <tr><th>#</th><th>戦略</th><th>方法</th></tr>
+    <tr><td>1</td><td><strong>/clear を頻繁に使う</strong></td><td>無関係なタスク間でコンテキストをリセット。最も効果的</td></tr>
+    <tr><td>2</td><td><strong>サブエージェントで調査委譲</strong></td><td>調査は別コンテキストで実行し、メインを汚さない</td></tr>
+    <tr><td>3</td><td><strong>/compact で圧縮</strong></td><td>重要情報を指定してカスタム圧縮</td></tr>
+    <tr><td>4</td><td><strong>2回修正してダメなら/clear</strong></td><td>失敗アプローチが溜まったコンテキストは性能劣化の原因</td></tr>
+    <tr><td>5</td><td><strong>rules/のpaths指定</strong></td><td>不要なルールをロードしない</td></tr>
+  </table>
+
+  <h3>よくある失敗パターン</h3>
+
+  <div class="card card-important">
+    <div class="card-title">避けるべきパターン</div>
+    <ol>
+      <li><strong>キッチンシンクセッション</strong> — 1つのセッションで無関係なタスクを混ぜる → <code>/clear</code>で分離</li>
+      <li><strong>繰り返し修正</strong> — 2回修正してダメなら<code>/clear</code>して良いプロンプトで再開</li>
+      <li><strong>肥大化したCLAUDE.md</strong> — 200行超えるとClaudeが半分を無視 → 容赦なく剪定</li>
+      <li><strong>範囲を限定しない調査指示</strong> — 「調査して」はNG。スコープを絞るかサブエージェントで</li>
+    </ol>
+  </div>
+</div>
+
+<!-- Section 7: Operation Rules -->
+<div class="section" id="operation">
+  <div class="section-num">SECTION 07</div>
+  <h2>運用ルール</h2>
+
+  <h3>新規プロジェクト追加フロー</h3>
+  <ol>
+    <li>ルート直下にフォルダを作成する（カテゴリフォルダに入れない）</li>
+    <li><code>.claude/rules/project-map.md</code> の地図テーブルに1行追記する</li>
+    <li>必要に応じてプロジェクト内に <code>CLAUDE.md</code> を配置（サブディレクトリ用）</li>
+  </ol>
+
+  <h3>プロジェクト休止・完了時</h3>
+  <ol>
+    <li>フォルダを <code>_archive/</code> に移動</li>
+    <li><code>.claude/rules/project-map.md</code> から該当行を削除</li>
+    <li>paths指定のrulesから該当パスを削除</li>
+  </ol>
+
+  <h3>CLAUDE.md読み込みの仕組み</h3>
+  <table>
+    <tr><th>スコープ</th><th>配置場所</th><th>読み込み</th><th>共有範囲</th></tr>
+    <tr><td>グローバル</td><td><code>~/.claude/CLAUDE.md</code></td><td>毎回</td><td>全プロジェクト・自分だけ</td></tr>
+    <tr><td>プロジェクト</td><td><code>./CLAUDE.md</code></td><td>毎回</td><td>チーム（git管理）</td></tr>
+    <tr><td>ローカル</td><td><code>./CLAUDE.local.md</code></td><td>毎回</td><td>自分だけ（.gitignore）</td></tr>
+    <tr><td>サブディレクトリ</td><td><code>./sub/CLAUDE.md</code></td><td><strong>遅延</strong>（該当ファイル操作時）</td><td>チーム</td></tr>
+  </table>
+  <p class="text-sm">サブディレクトリのCLAUDE.mdは遅延読込のため、大規模プロジェクトでもコンテキストを圧迫しない。</p>
+
+  <h3>定期メンテナンス</h3>
+  <table>
+    <tr><th>頻度</th><th>作業</th></tr>
+    <tr><td>毎月</td><td>CLAUDE.mdの棚卸し（矛盾・古い情報の削除、行数チェック）</td></tr>
+    <tr><td>毎月</td><td><code>_archive/</code> の見直し（復帰させるもの・完全削除するもの）</td></tr>
+    <tr><td>四半期</td><td>rules/ファイルの見直し（pathsの更新、不要ルールの削除）</td></tr>
+    <tr><td>随時</td><td>project-map.md の更新（プロジェクト追加・休止時）</td></tr>
+  </table>
+</div>
+
+<!-- Section 8: Template -->
+<div class="section" id="template">
+  <div class="section-num">SECTION 08</div>
+  <h2>テンプレート</h2>
+
+  <h3>CLAUDE.md テンプレート（コピーして使用）</h3>
+  <pre><code># プロジェクト共通設定
+
+## 言語
+- 日本語で対応すること
+
+## 環境
+- Python: （パスを記載）
+- Node/npm: （バージョン等）
+- OS: （OS名とシェル）
+
+## Git / GitHub
+- user.name: （ユーザー名）
+- user.email: （メールアドレス）
+- GitHub: （GitHubユーザー名）
+
+## デプロイ
+- （デプロイ方法を記載）
+
+## ファクトチェック必須ルール
+**IMPORTANT:** 自分の知識だけで事実情報を断言しない。
+必ずWebSearchで裏取りしてから回答する。
+
+## ファイル削除ルール
+**IMPORTANT:** Claude Codeにはファイル・フォルダの削除権限がない。
+- 「削除」とは、`削除/` フォルダに移動することを意味する
+
+## フォルダ運用
+- 新規プロジェクトはルート直下に作成
+- プロジェクト一覧は @.claude/rules/project-map.md を参照</code></pre>
+
+  <h3>rules/ファイル テンプレート（paths指定あり）</h3>
+  <pre><code>---
+description: （このルールの1行説明）
+paths:
+  - "フォルダA/**"
+  - "フォルダB/**"
+---
+- ルール1
+- ルール2</code></pre>
+
+  <h3>rules/ファイル テンプレート（pathsなし=毎回読込）</h3>
+  <pre><code>---
+description: （このルールの1行説明）
+---
+# タイトル
+
+- ルール1
+- ルール2</code></pre>
+</div>
+
+<!-- Section 9: Checklist -->
+<div class="section" id="checklist">
+  <div class="section-num">SECTION 09</div>
+  <h2>導入チェックリスト</h2>
+
+  <div class="card">
+    <div class="card-title">初期セットアップ</div>
+    <ul>
+      <li>&#9744; CLAUDE.md を作成（200行未満、テンプレートベース）</li>
+      <li>&#9744; <code>.claude/rules/</code> ディレクトリを作成</li>
+      <li>&#9744; <code>project-map.md</code> を作成（プロジェクト一覧）</li>
+      <li>&#9744; プロジェクト種別ごとの rules ファイルを作成（paths指定）</li>
+      <li>&#9744; <code>_archive/</code> フォルダを作成</li>
+      <li>&#9744; <code>削除/</code> フォルダを作成</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">品質チェック</div>
+    <ul>
+      <li>&#9744; CLAUDE.md が200行未満か？ → <code>wc -l CLAUDE.md</code></li>
+      <li>&#9744; 各行に「消すとClaudeが間違えるか？」テストを実施したか？</li>
+      <li>&#9744; 重要ルールに <code>**IMPORTANT**</code> が付いているか？</li>
+      <li>&#9744; 頻繁に変わる情報は rules/ に分離されているか？</li>
+      <li>&#9744; paths指定で条件付きロードを活用しているか？</li>
+      <li>&#9744; フォルダ階層が3段以内に収まっているか？</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">運用チェック</div>
+    <ul>
+      <li>&#9744; 新規プロジェクト追加時に project-map.md を更新しているか？</li>
+      <li>&#9744; 休止プロジェクトを定期的に <code>_archive/</code> に移動しているか？</li>
+      <li>&#9744; 月次でCLAUDE.mdの棚卸しを実施しているか？</li>
+      <li>&#9744; <code>/clear</code> を適切に使ってセッションを分離しているか？</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="divider">
+<p class="text-sm" style="text-align:center; padding: 24px 0;">
+  Claude Code ベストプラクティス基本設計書 v1.0 | 2026.04.03 | LIFEFUND Corporation<br>
+  本書はAnthropic公式ドキュメント（code.claude.com/docs）および社内実運用知見に基づく
+</p>
+
+</main>
+</div>
+</body>
+</html>

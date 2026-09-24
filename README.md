@@ -12,7 +12,7 @@ LIFEFUNDにおけるAI活用ガイドラインと公開HTMLを管理するフォ
 - 公開・施行状況: 施行中。公開URL https://lifefund-inc.github.io/lifefund-ai-guidelines/ （GitHub `lifefund-inc/lifefund-ai-guidelines`、PUBLIC）。公開版はこのフォルダと同じ最新版1つだけを置く
 - 情報分類・利用判定の機械可読正本: `../AI経営OS全社展開/01_全社共通設計/2026-07-21_AI利用判定モデル.json`
 - 判定モデル構成: schema 1.1 / ordered decision rules 20件
-- 判定モデルSHA-256: `B3BC26263143277989C302481061CD4444509D52AA43E585B2C2B3A565160576`
+- 判定モデルSHA-256: `46F8F9FC34FECEE335B869D3A7DEE3657B51A5E1E82A7A151C568BB7851C70F9`
 - 旧Claude Code自動セットアップ手順: **2026-07-20廃止・実行禁止**
 
 ## 主な中身
